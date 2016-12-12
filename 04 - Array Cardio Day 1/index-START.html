@@ -10,6 +10,38 @@
     // ## Array Cardio Day 1
 
     // Some data we can work with
+var boulevards =  ['City walls of Paris',
+ 'Thiers wall',
+ 'Wall of Charles V',
+ 'Wall of Philip II Augustus',
+ 'City gates of Paris',
+ 'Haussmann\'s renovation of Paris',
+ 'Boulevards of the Marshals',
+ 'Boulevard AugusteBlanqui',
+ 'Boulevard Barbès',
+ 'Boulevard Beaumarchais',
+ 'Boulevard de l\'AmiralBruix',
+ 'Boulevard de Strasbourg',
+ 'Boulevard des Capucines',
+ 'Boulevard de la Chapelle',
+ 'Boulevard de Clichy',
+ 'Boulevard du Crime',
+ 'Boulevard Haussmann',
+ 'Boulevard de l\'Hôpital',
+ 'Boulevard des Italiens',
+ 'Boulevard de la Madeleine',
+ 'Boulevard de Magenta',
+ 'Boulevard Montmartre',
+ 'Boulevard du Montparnasse',
+ 'Boulevard Raspail',
+ 'Boulevard RichardLenoir',
+ 'Boulevard de Rochechouart',
+ 'Boulevard SaintGermain',
+ 'Boulevard SaintMichel',
+ 'Boulevard de Sébastopol',
+ 'Boulevard du Temple',
+ 'Boulevard Voltaire',
+ 'Boulevard de la Zone']
 
     const inventors = [
       { first: 'Albert', last: 'Einstein', year: 1879, passed: 1955 },
@@ -28,27 +60,96 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
+    console.log(inventors.filter(bornIn1500s));
+
+    function bornIn1500s(values) {
+      return (values['year'] > 1499) && (values['year'] < 1600); 
+    }
+    
+
     // Array.prototype.map()
     // 2. Give us an array of the inventory first and last names
+function lastNames() {
+return inventors.map(function(item) {
+  return item['first'] + ' ' + item['last'];
+});
+}    
+
+console.log(lastNames());
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+var sortedByBirthdate = inventors.sort(function(a,b) {
+  const birthdateA = a.year;
+  const birthdateB = b.year;
+  if (birthdateA > birthdateB) {
+    return 1;
+  } else {
+    return -1
+  };
+});
+
+console.log(sortedByBirthdate)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+var yearsLived = inventors.map(function(a) {
+  const lifeLengthA = a.passed - a.year;
+  return lifeLengthA;
+});
+
+var totalYearsLived = yearsLived.reduce(function(a,b) {
+  return a + b;
+},0);
+
+console.log(totalYearsLived);
 
     // 5. Sort the inventors by years lived
+
+var sortedByYearsLived = inventors.sort(function(a,b) {
+  const yearsLivedA = a.passed - a.year;
+  const yearsLivedB = b.passed - b.year;
+  if (yearsLivedA > yearsLivedB) {
+    return 1;
+  } else {
+    return -1;
+  };
+});
+console.log(sortedByYearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+var containsDe = boulevards.filter(function(value) {
+  return value.includes('de ');
+});
+
+console.log(containsDe);
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+var peopleSorted = people.sort(function(a,b) {
+  if (a  > b) {
+    return 1;
+  } else {
+    return -1;
+  }
+});
+console.log(peopleSorted);
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    const transportation = data.reduce(function(obj, item) {
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+
+    console.log(transportation);
+
 
   </script>
 </body>
